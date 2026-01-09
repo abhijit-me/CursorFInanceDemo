@@ -58,6 +58,10 @@ import { AuthService } from './core/services/auth.service';
               <mat-icon>savings</mat-icon>
               <span>Savings Goals</span>
             </a>
+            <a mat-list-item routerLink="/monthly-report" routerLinkActive="active">
+              <mat-icon>assessment</mat-icon>
+              <span>Monthly Report</span>
+            </a>
           </mat-nav-list>
         </mat-sidenav>
 
