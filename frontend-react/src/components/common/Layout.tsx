@@ -130,6 +130,8 @@ const Layout: React.FC = () => {
         variant="permanent"
         sx={{
           display: { xs: 'none', md: 'block' },
+          width: drawerWidth,
+          flexShrink: 0,
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: drawerWidth,
@@ -146,13 +148,12 @@ const Layout: React.FC = () => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          mt: '64px',
           backgroundColor: '#f5f5f5',
-          minHeight: 'calc(100vh - 64px)',
+          minHeight: '100vh',
           overflow: 'auto',
         }}
       >
+        <Box sx={{ height: '64px' }} />
         <Outlet />
       </Box>
     </Box>
