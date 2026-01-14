@@ -7,7 +7,6 @@ import {
   Typography,
   Button,
   CircularProgress,
-  Grid,
   FormControl,
   InputLabel,
   Select,
@@ -19,7 +18,6 @@ import {
   TableHead,
   TableRow,
   LinearProgress,
-  Paper,
 } from '@mui/material';
 import { Download as DownloadIcon } from '@mui/icons-material';
 import { Doughnut } from 'react-chartjs-2';
@@ -76,6 +74,7 @@ const MonthlyReports: React.FC = () => {
 
   useEffect(() => {
     loadReport();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedMonth, selectedYear]);
 
   const loadReport = async () => {

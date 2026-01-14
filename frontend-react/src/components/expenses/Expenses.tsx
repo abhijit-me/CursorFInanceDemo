@@ -17,7 +17,6 @@ import {
   MenuItem,
   Snackbar,
   Alert,
-  IconButton,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {
@@ -67,6 +66,7 @@ const Expenses: React.FC = () => {
 
   useEffect(() => {
     loadExpenses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterCategoryId, filterStartDate, filterEndDate]);
 
   const loadCategories = async () => {
