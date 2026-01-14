@@ -21,7 +21,7 @@ public class SavingsGoalsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetSavingsGoals([FromQuery] string? is_completed)
+    public async Task<IActionResult> GetSavingsGoals([FromQuery] string? isCompleted)
     {
         var userId = GetCurrentUserId();
         if (userId == null) return Unauthorized();
@@ -29,9 +29,9 @@ public class SavingsGoalsController : ControllerBase
         var query = _context.SavingsGoals
             .Where(g => g.UserId == userId.Value);
 
-        if (!string.IsNullOrEmpty(is_completed))
+        if (!string.IsNullOrEmpty(isCompleted))
         {
-            var completedFilter = is_completed.ToLower() == "true";
+            var completedFilter = isCompleted.ToLower() == "true";
             query = query.Where(g => g.IsCompleted == completedFilter);
         }
 

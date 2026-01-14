@@ -2,22 +2,22 @@ import { Category } from './category.model';
 
 export interface Expense {
   id?: number;
-  user_id?: number;
-  category_id: number;
+  userId?: number;
+  categoryId: number;
   category?: Category;
   amount: number;
   description: string;
   notes?: string;
   date: string;
-  receipt_path?: string;
-  is_recurring?: boolean;
-  created_at?: string;
-  updated_at?: string;
+  receiptPath?: string;
+  isRecurring?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ExpenseFilter {
-  category_id?: number;
-  start_date?: string;
-  end_date?: string;
+  categoryId?: number;
+  startDate?: string;
+  endDate?: string;
 }
 

@@ -42,8 +42,8 @@ import { RecurringBillDialogComponent } from './recurring-bill-dialog/recurring-
 
       <div class="bills-list" *ngIf="!loading">
         <mat-card *ngFor="let bill of bills" class="bill-card" 
-                  [class.overdue]="bill.is_overdue"
-                  [class.upcoming]="bill.needs_reminder">
+                  [class.overdue]="bill.isOverdue"
+                  [class.upcoming]="bill.needsReminder">
           <mat-card-header>
             <div mat-card-avatar class="category-icon" 
                  [style.background-color]="bill.category?.color">
@@ -61,27 +61,27 @@ import { RecurringBillDialogComponent } from './recurring-bill-dialog/recurring-
             <div class="bill-info">
               <div class="info-item">
                 <mat-icon>event</mat-icon>
-                <span>Due: {{ bill.next_due_date | date }}</span>
+                <span>Due: {{ bill.nextDueDate | date }}</span>
               </div>
-              <div class="info-item" *ngIf="bill.days_until_due !== undefined">
+              <div class="info-item" *ngIf="bill.daysUntilDue !== undefined">
                 <mat-icon>schedule</mat-icon>
                 <span>
-                  {{ bill.is_overdue ? 'Overdue by ' + Math.abs(bill.days_until_due) : 
-                     'In ' + bill.days_until_due }} days
+                  {{ bill.isOverdue ? 'Overdue by ' + Math.abs(bill.daysUntilDue) : 
+                     'In ' + bill.daysUntilDue }} days
                 </span>
               </div>
             </div>
 
             <mat-chip-set>
-              <mat-chip *ngIf="bill.is_overdue" class="overdue-chip">
+              <mat-chip *ngIf="bill.isOverdue" class="overdue-chip">
                 <mat-icon>error</mat-icon>
                 Overdue
               </mat-chip>
-              <mat-chip *ngIf="bill.needs_reminder && !bill.is_overdue" class="reminder-chip">
+              <mat-chip *ngIf="bill.needsReminder && !bill.isOverdue" class="reminder-chip">
                 <mat-icon>notifications</mat-icon>
                 Due Soon
               </mat-chip>
-              <mat-chip *ngIf="!bill.is_active" class="inactive-chip">
+              <mat-chip *ngIf="!bill.isActive" class="inactive-chip">
                 Inactive
               </mat-chip>
             </mat-chip-set>
@@ -258,9 +258,9 @@ export class RecurringBillsComponent implements OnInit {
     this.billService.getBills().subscribe({
       next: (bills) => {
         this.bills = bills.sort((a, b) => {
-          if (a.is_overdue && !b.is_overdue) return -1;
-          if (!a.is_overdue && b.is_overdue) return 1;
-          return new Date(a.next_due_date).getTime() - new Date(b.next_due_date).getTime();
+          if (a.isOverdue && !b.isOverdue) return -1;
+          if (!a.isOverdue && b.isOverdue) return 1;
+          return new Date(a.nextDueDate).getTime() - new Date(b.nextDueDate).getTime();
         });
         this.loading = false;
       },

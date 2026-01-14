@@ -1,16 +1,16 @@
 export interface DashboardStats {
-  total_expenses: number;
-  total_budget: number;
-  budget_remaining: number;
-  budget_percentage: number;
-  upcoming_bills: number;
-  active_savings_goals: number;
-  total_saved: number;
+  totalExpenses: number;
+  totalBudget: number;
+  budgetRemaining: number;
+  budgetPercentage: number;
+  upcomingBills: number;
+  activeSavingsGoals: number;
+  totalSaved: number;
 }
 
 export interface SpendingByCategory {
-  category_id: number;
-  category_name: string;
+  categoryId: number;
+  categoryName: string;
   color: string;
   icon: string;
   amount: number;

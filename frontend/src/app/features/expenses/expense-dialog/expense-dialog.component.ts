@@ -57,13 +57,13 @@ import { Category } from '../../../core/models/category.model';
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Category</mat-label>
-          <mat-select formControlName="category_id" required>
+          <mat-select formControlName="categoryId" required>
             <mat-option *ngFor="let category of categories" [value]="category.id">
               <mat-icon>{{ category.icon }}</mat-icon>
               {{ category.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="expenseForm.get('category_id')?.hasError('required')">
+          <mat-error *ngIf="expenseForm.get('categoryId')?.hasError('required')">
             Category is required
           </mat-error>
         </mat-form-field>
@@ -135,7 +135,7 @@ export class ExpenseDialogComponent implements OnInit {
     this.expenseForm = this.fb.group({
       description: [data.expense?.description || '', Validators.required],
       amount: [data.expense?.amount || '', [Validators.required, Validators.min(0)]],
-      category_id: [data.expense?.category_id || '', Validators.required],
+      categoryId: [data.expense?.categoryId || '', Validators.required],
       date: [data.expense?.date ? new Date(data.expense.date) : new Date(), Validators.required],
       notes: [data.expense?.notes || '']
     });

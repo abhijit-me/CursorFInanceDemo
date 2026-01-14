@@ -81,17 +81,17 @@ import * as XLSX from 'xlsx';
         </mat-card>
 
         <!-- Top 3 Spending Categories -->
-        <mat-card class="top-categories-card" *ngIf="report.top_categories.length > 0">
+        <mat-card class="top-categories-card" *ngIf="report.topCategories.length > 0">
           <mat-card-header>
             <mat-card-title>Top 3 Spending Categories</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <div class="category-list">
-              <div *ngFor="let category of report.top_categories" class="category-item">
+              <div *ngFor="let category of report.topCategories" class="category-item">
                 <div class="category-header">
                   <div class="category-info">
                     <mat-icon [style.color]="category.color">{{ category.icon }}</mat-icon>
-                    <span class="category-name">{{ category.category_name }}</span>
+                    <span class="category-name">{{ category.categoryName }}</span>
                   </div>
                 </div>
                 <div class="progress-section">
@@ -132,7 +132,7 @@ import * as XLSX from 'xlsx';
           </mat-card-header>
           <mat-card-content>
             <div class="table-container">
-              <table mat-table [dataSource]="report.expense_details" class="details-table">
+              <table mat-table [dataSource]="report.expenseDetails" class="details-table">
                 <ng-container matColumnDef="date">
                   <th mat-header-cell *matHeaderCellDef>Date</th>
                   <td mat-cell *matCellDef="let expense">{{ expense.date | date:'MMM d, yyyy' }}</td>
@@ -167,14 +167,14 @@ import * as XLSX from 'xlsx';
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
 
-              <div *ngIf="report.expense_details.length === 0" class="no-data">
+              <div *ngIf="report.expenseDetails.length === 0" class="no-data">
                 No expenses recorded for this month
               </div>
             </div>
 
-            <div class="total-row" *ngIf="report.expense_details.length > 0">
+            <div class="total-row" *ngIf="report.expenseDetails.length > 0">
               <span class="total-label">TOTAL</span>
-              <span class="total-amount">\${{ report.total_spending | number:'1.2-2' }}</span>
+              <span class="total-amount">\${{ report.totalSpending | number:'1.2-2' }}</span>
             </div>
           </mat-card-content>
         </mat-card>
@@ -507,12 +507,12 @@ export class MonthlyReportsComponent implements OnInit {
   }
 
   updateChartData() {
-    if (this.report && this.report.spending_by_category.length > 0) {
+    if (this.report && this.report.spendingByCategory.length > 0) {
       this.pieChartData = {
-        labels: this.report.spending_by_category.map(c => c.category_name),
+        labels: this.report.spendingByCategory.map(c => c.categoryName),
         datasets: [{
-          data: this.report.spending_by_category.map(c => c.amount),
-          backgroundColor: this.report.spending_by_category.map(c => c.color)
+          data: this.report.spendingByCategory.map(c => c.amount),
+          backgroundColor: this.report.spendingByCategory.map(c => c.color)
         }]
       };
     } else {
@@ -553,7 +553,7 @@ export class MonthlyReportsComponent implements OnInit {
         XLSX.utils.book_append_sheet(wb, ws, 'Monthly Report');
 
         // Generate filename
-        const fileName = `monthly-report-${exportData.month_name.replace(/\s+/g, '-')}.xlsx`;
+        const fileName = `monthly-report-${exportData.monthName.replace(/\s+/g, '-')}.xlsx`;
 
         // Save file
         XLSX.writeFile(wb, fileName);

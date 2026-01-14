@@ -43,15 +43,15 @@ import { ContributeDialogComponent } from './contribute-dialog/contribute-dialog
 
       <div class="goals-grid" *ngIf="!loading">
         <mat-card *ngFor="let goal of goals" class="goal-card" 
-                  [class.completed]="goal.is_completed">
+                  [class.completed]="goal.isCompleted">
           <mat-card-header>
             <div mat-card-avatar class="goal-icon" 
                  [style.background-color]="goal.color">
               <mat-icon>{{ goal.icon || 'savings' }}</mat-icon>
             </div>
             <mat-card-title>{{ goal.name }}</mat-card-title>
-            <mat-card-subtitle *ngIf="goal.target_date">
-              Target: {{ goal.target_date | date }}
+            <mat-card-subtitle *ngIf="goal.targetDate">
+              Target: {{ goal.targetDate | date }}
             </mat-card-subtitle>
           </mat-card-header>
 
@@ -59,31 +59,31 @@ import { ContributeDialogComponent } from './contribute-dialog/contribute-dialog
             <div class="goal-amounts">
               <div class="amount-item">
                 <span class="label">Current</span>
-                <span class="value">\${{ goal.current_amount | number:'1.2-2' }}</span>
+                <span class="value">\${{ goal.currentAmount | number:'1.2-2' }}</span>
               </div>
               <div class="amount-item">
                 <span class="label">Target</span>
-                <span class="value">\${{ goal.target_amount | number:'1.2-2' }}</span>
+                <span class="value">\${{ goal.targetAmount | number:'1.2-2' }}</span>
               </div>
               <div class="amount-item">
                 <span class="label">Remaining</span>
-                <span class="value">\${{ (goal.target_amount - goal.current_amount) | number:'1.2-2' }}</span>
+                <span class="value">\${{ (goal.targetAmount - goal.currentAmount) | number:'1.2-2' }}</span>
               </div>
             </div>
 
             <div class="progress-section">
               <div class="progress-header">
                 <span>{{ goal.progress | number:'1.0-0' }}% Complete</span>
-                <mat-icon *ngIf="goal.is_completed" class="completed-icon">check_circle</mat-icon>
+                <mat-icon *ngIf="goal.isCompleted" class="completed-icon">check_circle</mat-icon>
               </div>
               <mat-progress-bar 
                 mode="determinate" 
                 [value]="goal.progress"
-                [color]="goal.is_completed ? 'accent' : 'primary'">
+                [color]="goal.isCompleted ? 'accent' : 'primary'">
               </mat-progress-bar>
             </div>
 
-            <mat-chip-set *ngIf="goal.is_completed">
+            <mat-chip-set *ngIf="goal.isCompleted">
               <mat-chip class="completed-chip">
                 <mat-icon>celebration</mat-icon>
                 Goal Achieved!
@@ -93,7 +93,7 @@ import { ContributeDialogComponent } from './contribute-dialog/contribute-dialog
 
           <mat-card-actions>
             <button mat-button color="primary" (click)="openContributeDialog(goal)" 
-                    [disabled]="goal.is_completed">
+                    [disabled]="goal.isCompleted">
               <mat-icon>add_circle</mat-icon>
               Contribute
             </button>

@@ -40,25 +40,25 @@ import { Budget } from '../../core/models/budget.model';
         <div class="stats-grid">
           <mat-card class="stat-card">
             <mat-icon class="stat-icon">account_balance_wallet</mat-icon>
-            <div class="stat-value">\${{ stats.total_expenses | number:'1.2-2' }}</div>
+            <div class="stat-value">\${{ stats.totalExpenses | number:'1.2-2' }}</div>
             <div class="stat-label">Total Expenses</div>
           </mat-card>
 
           <mat-card class="stat-card">
             <mat-icon class="stat-icon">savings</mat-icon>
-            <div class="stat-value">\${{ stats.budget_remaining | number:'1.2-2' }}</div>
+            <div class="stat-value">\${{ stats.budgetRemaining | number:'1.2-2' }}</div>
             <div class="stat-label">Budget Remaining</div>
           </mat-card>
 
           <mat-card class="stat-card">
             <mat-icon class="stat-icon">event_repeat</mat-icon>
-            <div class="stat-value">{{ stats.upcoming_bills }}</div>
+            <div class="stat-value">{{ stats.upcomingBills }}</div>
             <div class="stat-label">Upcoming Bills</div>
           </mat-card>
 
           <mat-card class="stat-card">
             <mat-icon class="stat-icon">flag</mat-icon>
-            <div class="stat-value">{{ stats.active_savings_goals }}</div>
+            <div class="stat-value">{{ stats.activeSavingsGoals }}</div>
             <div class="stat-label">Active Goals</div>
           </mat-card>
         </div>
@@ -328,13 +328,13 @@ import { Budget } from '../../core/models/budget.model';
 export class DashboardComponent implements OnInit {
   loading = true;
   stats: DashboardStats = {
-    total_expenses: 0,
-    total_budget: 0,
-    budget_remaining: 0,
-    budget_percentage: 0,
-    upcoming_bills: 0,
-    active_savings_goals: 0,
-    total_saved: 0
+    totalExpenses: 0,
+    totalBudget: 0,
+    budgetRemaining: 0,
+    budgetPercentage: 0,
+    upcomingBills: 0,
+    activeSavingsGoals: 0,
+    totalSaved: 0
   };
   budgets: Budget[] = [];
   recentExpenses: Expense[] = [];
@@ -425,7 +425,7 @@ export class DashboardComponent implements OnInit {
       next: (data) => {
         if (data.length > 0) {
           this.categoryChartData = {
-            labels: data.map(d => d.category_name),
+            labels: data.map(d => d.categoryName),
             datasets: [{
               data: data.map(d => d.amount),
               backgroundColor: data.map(d => d.color)

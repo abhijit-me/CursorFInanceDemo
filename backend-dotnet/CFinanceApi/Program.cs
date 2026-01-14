@@ -9,7 +9,12 @@ using CFinanceApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Use camelCase for JSON property names (e.g., accessToken instead of AccessToken)
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 
 // Configure Entity Framework with PostgreSQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
@@ -113,10 +118,13 @@ app.Use(async (context, next) =>
     {
         await next();
     }
-    catch (Exception)
+    catch (Exception ex)
     {
+        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An unhandled exception occurred");
+        
         context.Response.StatusCode = 500;
-        await context.Response.WriteAsJsonAsync(new { error = "Internal server error" });
+        await context.Response.WriteAsJsonAsync(new { error = "Internal server error", details = ex.Message });
     }
 });
 

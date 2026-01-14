@@ -34,13 +34,13 @@ import { Category } from '../../../core/models/category.model';
       <form [formGroup]="budgetForm">
         <mat-form-field class="form-field-full-width">
           <mat-label>Category</mat-label>
-          <mat-select formControlName="category_id" required [disabled]="isEditMode">
+          <mat-select formControlName="categoryId" required [disabled]="isEditMode">
             <mat-option *ngFor="let category of categories" [value]="category.id">
               <mat-icon>{{ category.icon }}</mat-icon>
               {{ category.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="budgetForm.get('category_id')?.hasError('required')">
+          <mat-error *ngIf="budgetForm.get('categoryId')?.hasError('required')">
             Category is required
           </mat-error>
         </mat-form-field>
@@ -101,7 +101,7 @@ export class BudgetDialogComponent implements OnInit {
     this.isEditMode = !!data.budget;
 
     this.budgetForm = this.fb.group({
-      category_id: [{ value: data.budget?.category_id || '', disabled: this.isEditMode }, Validators.required],
+      categoryId: [{ value: data.budget?.categoryId || '', disabled: this.isEditMode }, Validators.required],
       amount: [data.budget?.amount || '', [Validators.required, Validators.min(0)]],
       period: [data.budget?.period || 'monthly', Validators.required]
     });
@@ -114,7 +114,7 @@ export class BudgetDialogComponent implements OnInit {
       this.saving = true;
       const budgetData = {
         ...this.budgetForm.getRawValue(),
-        start_date: new Date().toISOString().split('T')[0]
+        startDate: new Date().toISOString().split('T')[0]
       };
 
       if (this.isEditMode) {

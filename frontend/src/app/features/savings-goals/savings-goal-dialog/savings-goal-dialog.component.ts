@@ -43,22 +43,22 @@ import { SavingsGoal } from '../../../core/models/savings-goal.model';
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Target Amount</mat-label>
-          <input matInput type="number" formControlName="target_amount" required>
+          <input matInput type="number" formControlName="targetAmount" required>
           <span matPrefix>$&nbsp;</span>
-          <mat-error *ngIf="goalForm.get('target_amount')?.hasError('required')">
+          <mat-error *ngIf="goalForm.get('targetAmount')?.hasError('required')">
             Target amount is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Current Amount</mat-label>
-          <input matInput type="number" formControlName="current_amount">
+          <input matInput type="number" formControlName="currentAmount">
           <span matPrefix>$&nbsp;</span>
         </mat-form-field>
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Target Date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="target_date">
+          <input matInput [matDatepicker]="picker" formControlName="targetDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -106,9 +106,9 @@ export class SavingsGoalDialogComponent implements OnInit {
 
     this.goalForm = this.fb.group({
       name: [data.goal?.name || '', Validators.required],
-      target_amount: [data.goal?.target_amount || '', [Validators.required, Validators.min(0)]],
-      current_amount: [data.goal?.current_amount || 0, Validators.min(0)],
-      target_date: [data.goal?.target_date ? new Date(data.goal.target_date) : null],
+      targetAmount: [data.goal?.targetAmount || '', [Validators.required, Validators.min(0)]],
+      currentAmount: [data.goal?.currentAmount || 0, Validators.min(0)],
+      targetDate: [data.goal?.targetDate ? new Date(data.goal.targetDate) : null],
       icon: [data.goal?.icon || 'savings'],
       color: [data.goal?.color || '#4CAF50']
     });
@@ -121,7 +121,7 @@ export class SavingsGoalDialogComponent implements OnInit {
       this.saving = true;
       const goalData = {
         ...this.goalForm.value,
-        target_date: this.goalForm.value.target_date ? this.formatDate(this.goalForm.value.target_date) : null
+        targetDate: this.goalForm.value.targetDate ? this.formatDate(this.goalForm.value.targetDate) : null
       };
 
       if (this.isEditMode) {

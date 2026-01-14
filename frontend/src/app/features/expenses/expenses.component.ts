@@ -55,7 +55,7 @@ import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.componen
           <form [formGroup]="filterForm" class="filter-form">
             <mat-form-field>
               <mat-label>Category</mat-label>
-              <mat-select formControlName="category_id" (selectionChange)="applyFilters()">
+              <mat-select formControlName="categoryId" (selectionChange)="applyFilters()">
                 <mat-option [value]="null">All Categories</mat-option>
                 <mat-option *ngFor="let category of categories" [value]="category.id">
                   {{ category.name }}
@@ -65,7 +65,7 @@ import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.componen
 
             <mat-form-field>
               <mat-label>Start Date</mat-label>
-              <input matInput [matDatepicker]="startPicker" formControlName="start_date" 
+              <input matInput [matDatepicker]="startPicker" formControlName="startDate" 
                      (dateChange)="applyFilters()">
               <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
               <mat-datepicker #startPicker></mat-datepicker>
@@ -73,7 +73,7 @@ import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.componen
 
             <mat-form-field>
               <mat-label>End Date</mat-label>
-              <input matInput [matDatepicker]="endPicker" formControlName="end_date" 
+              <input matInput [matDatepicker]="endPicker" formControlName="endDate" 
                      (dateChange)="applyFilters()">
               <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
               <mat-datepicker #endPicker></mat-datepicker>
@@ -104,7 +104,7 @@ import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.componen
           <mat-card-content>
             <div class="expense-amount">\${{ expense.amount | number:'1.2-2' }}</div>
             <p *ngIf="expense.notes" class="expense-notes">{{ expense.notes }}</p>
-            <mat-chip-set *ngIf="expense.receipt_path">
+            <mat-chip-set *ngIf="expense.receiptPath">
               <mat-chip>
                 <mat-icon>attach_file</mat-icon>
                 Receipt attached
@@ -243,9 +243,9 @@ export class ExpensesComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.filterForm = this.fb.group({
-      category_id: [null],
-      start_date: [null],
-      end_date: [null]
+      categoryId: [null],
+      startDate: [null],
+      endDate: [null]
     });
   }
 
@@ -285,14 +285,14 @@ export class ExpensesComponent implements OnInit {
     const formValue = this.filterForm.value;
     const filters: any = {};
 
-    if (formValue.category_id) {
-      filters.category_id = formValue.category_id;
+    if (formValue.categoryId) {
+      filters.categoryId = formValue.categoryId;
     }
-    if (formValue.start_date) {
-      filters.start_date = this.formatDate(formValue.start_date);
+    if (formValue.startDate) {
+      filters.startDate = this.formatDate(formValue.startDate);
     }
-    if (formValue.end_date) {
-      filters.end_date = this.formatDate(formValue.end_date);
+    if (formValue.endDate) {
+      filters.endDate = this.formatDate(formValue.endDate);
     }
 
     return filters;

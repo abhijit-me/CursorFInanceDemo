@@ -21,7 +21,7 @@ public class RecurringBillsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetRecurringBills([FromQuery] string? is_active)
+    public async Task<IActionResult> GetRecurringBills([FromQuery] string? isActive)
     {
         var userId = GetCurrentUserId();
         if (userId == null) return Unauthorized();
@@ -30,9 +30,9 @@ public class RecurringBillsController : ControllerBase
             .Include(b => b.Category)
             .Where(b => b.UserId == userId.Value);
 
-        if (!string.IsNullOrEmpty(is_active))
+        if (!string.IsNullOrEmpty(isActive))
         {
-            var activeFilter = is_active.ToLower() == "true";
+            var activeFilter = isActive.ToLower() == "true";
             query = query.Where(b => b.IsActive == activeFilter);
         }
 

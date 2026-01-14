@@ -27,9 +27,9 @@ import { SavingsGoal } from '../../../core/models/savings-goal.model';
     
     <mat-dialog-content>
       <div class="goal-info">
-        <p><strong>Current:</strong> \${{ goal.current_amount | number:'1.2-2' }}</p>
-        <p><strong>Target:</strong> \${{ goal.target_amount | number:'1.2-2' }}</p>
-        <p><strong>Remaining:</strong> \${{ (goal.target_amount - goal.current_amount) | number:'1.2-2' }}</p>
+        <p><strong>Current:</strong> \${{ goal.currentAmount | number:'1.2-2' }}</p>
+        <p><strong>Target:</strong> \${{ goal.targetAmount | number:'1.2-2' }}</p>
+        <p><strong>Remaining:</strong> \${{ (goal.targetAmount - goal.currentAmount) | number:'1.2-2' }}</p>
       </div>
 
       <form [formGroup]="contributeForm">

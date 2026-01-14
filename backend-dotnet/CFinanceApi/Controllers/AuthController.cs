@@ -181,6 +181,23 @@ public class AuthController : ControllerBase
         return null;
     }
 
+    // TEMPORARY: Fix password hash for demo user
+    [HttpPost("fix-demo-password")]
+    public async Task<IActionResult> FixDemoPassword()
+    {
+        var demoUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == "demo@financeapp.com");
+        if (demoUser == null)
+        {
+            return NotFound(new { error = "Demo user not found" });
+        }
+
+        // Update password hash to BCrypt for "demo123"
+        demoUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword("demo123");
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Demo user password updated to use BCrypt", email = demoUser.Email });
+    }
+
     private static UserResponse MapToUserResponse(User user)
     {
         return new UserResponse

@@ -30,9 +30,9 @@ public class ExpensesController : ControllerBase
 
     [HttpGet]
     public async Task<IActionResult> GetExpenses(
-        [FromQuery] int? category_id,
-        [FromQuery] string? start_date,
-        [FromQuery] string? end_date)
+        [FromQuery] int? categoryId,
+        [FromQuery] string? startDate,
+        [FromQuery] string? endDate)
     {
         var userId = GetCurrentUserId();
         if (userId == null) return Unauthorized();
@@ -41,14 +41,14 @@ public class ExpensesController : ControllerBase
             .Include(e => e.Category)
             .Where(e => e.UserId == userId.Value);
 
-        if (category_id.HasValue)
-            query = query.Where(e => e.CategoryId == category_id.Value);
+        if (categoryId.HasValue)
+            query = query.Where(e => e.CategoryId == categoryId.Value);
 
-        if (DateOnly.TryParse(start_date, out var startDate))
-            query = query.Where(e => e.Date >= startDate);
+        if (DateOnly.TryParse(startDate, out var parsedStartDate))
+            query = query.Where(e => e.Date >= parsedStartDate);
 
-        if (DateOnly.TryParse(end_date, out var endDate))
-            query = query.Where(e => e.Date <= endDate);
+        if (DateOnly.TryParse(endDate, out var parsedEndDate))
+            query = query.Where(e => e.Date <= parsedEndDate);
 
         var expenses = await query
             .OrderByDescending(e => e.Date)

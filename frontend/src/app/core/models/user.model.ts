@@ -2,9 +2,9 @@ export interface User {
   id: number;
   email: string;
   username: string;
-  first_name?: string;
-  last_name?: string;
-  created_at?: string;
+  firstName?: string;
+  lastName?: string;
+  createdAt?: string;
 }
 
 export interface LoginRequest {
@@ -16,13 +16,13 @@ export interface RegisterRequest {
   email: string;
   username: string;
   password: string;
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface AuthResponse {
-  access_token: string;
-  refresh_token?: string;
+  accessToken: string;
+  refreshToken?: string;
   user: User;
   message?: string;
 }

@@ -59,19 +59,19 @@ export class AuthService {
     return localStorage.getItem('refresh_token');
   }
 
-  refreshToken(): Observable<{ access_token: string }> {
-    return this.http.post<{ access_token: string }>(`${environment.apiUrl}/auth/refresh`, {})
+  refreshToken(): Observable<{ accessToken: string }> {
+    return this.http.post<{ accessToken: string }>(`${environment.apiUrl}/auth/refresh`, {})
       .pipe(
         tap(response => {
-          localStorage.setItem('access_token', response.access_token);
+          localStorage.setItem('access_token', response.accessToken);
         })
       );
   }
 
   private handleAuthResponse(response: AuthResponse) {
-    localStorage.setItem('access_token', response.access_token);
-    if (response.refresh_token) {
-      localStorage.setItem('refresh_token', response.refresh_token);
+    localStorage.setItem('access_token', response.accessToken);
+    if (response.refreshToken) {
+      localStorage.setItem('refresh_token', response.refreshToken);
     }
     this.currentUserSubject.next(response.user);
     this.isAuthenticatedSubject.next(true);

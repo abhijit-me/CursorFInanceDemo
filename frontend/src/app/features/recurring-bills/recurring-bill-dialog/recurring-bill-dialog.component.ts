@@ -57,13 +57,13 @@ import { Category } from '../../../core/models/category.model';
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Category</mat-label>
-          <mat-select formControlName="category_id" required>
+          <mat-select formControlName="categoryId" required>
             <mat-option *ngFor="let category of categories" [value]="category.id">
               <mat-icon>{{ category.icon }}</mat-icon>
               {{ category.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="billForm.get('category_id')?.hasError('required')">
+          <mat-error *ngIf="billForm.get('categoryId')?.hasError('required')">
             Category is required
           </mat-error>
         </mat-form-field>
@@ -79,14 +79,14 @@ import { Category } from '../../../core/models/category.model';
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Next Due Date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="next_due_date" required>
+          <input matInput [matDatepicker]="picker" formControlName="nextDueDate" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="form-field-full-width">
           <mat-label>Reminder Days Before</mat-label>
-          <input matInput type="number" formControlName="reminder_days">
+          <input matInput type="number" formControlName="reminderDays">
         </mat-form-field>
 
         <mat-form-field class="form-field-full-width">
@@ -94,7 +94,7 @@ import { Category } from '../../../core/models/category.model';
           <textarea matInput formControlName="notes" rows="3"></textarea>
         </mat-form-field>
 
-        <mat-checkbox formControlName="is_active">Active</mat-checkbox>
+        <mat-checkbox formControlName="isActive">Active</mat-checkbox>
       </form>
     </mat-dialog-content>
 
@@ -141,12 +141,12 @@ export class RecurringBillDialogComponent implements OnInit {
     this.billForm = this.fb.group({
       name: [data.bill?.name || '', Validators.required],
       amount: [data.bill?.amount || '', [Validators.required, Validators.min(0)]],
-      category_id: [data.bill?.category_id || '', Validators.required],
+      categoryId: [data.bill?.categoryId || '', Validators.required],
       frequency: [data.bill?.frequency || 'monthly', Validators.required],
-      next_due_date: [data.bill?.next_due_date ? new Date(data.bill.next_due_date) : new Date(), Validators.required],
-      reminder_days: [data.bill?.reminder_days || 3],
+      nextDueDate: [data.bill?.nextDueDate ? new Date(data.bill.nextDueDate) : new Date(), Validators.required],
+      reminderDays: [data.bill?.reminderDays || 3],
       notes: [data.bill?.notes || ''],
-      is_active: [data.bill?.is_active !== undefined ? data.bill.is_active : true]
+      isActive: [data.bill?.isActive !== undefined ? data.bill.isActive : true]
     });
   }
 
@@ -157,7 +157,7 @@ export class RecurringBillDialogComponent implements OnInit {
       this.saving = true;
       const billData = {
         ...this.billForm.value,
-        next_due_date: this.formatDate(this.billForm.value.next_due_date)
+        nextDueDate: this.formatDate(this.billForm.value.nextDueDate)
       };
 
       if (this.isEditMode) {

@@ -1,14 +1,14 @@
 export interface SavingsGoal {
   id?: number;
-  user_id?: number;
+  userId?: number;
   name: string;
-  target_amount: number;
-  current_amount: number;
+  targetAmount: number;
+  currentAmount: number;
   progress?: number;
-  target_date?: string;
+  targetDate?: string;
   icon?: string;
   color?: string;
-  is_completed?: boolean;
-  created_at?: string;
+  isCompleted?: boolean;
+  createdAt?: string;
 }
 

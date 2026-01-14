@@ -16,14 +16,14 @@ export class ExpenseService {
     let params = new HttpParams();
     
     if (filter) {
-      if (filter.category_id) {
-        params = params.set('category_id', filter.category_id.toString());
+      if (filter.categoryId) {
+        params = params.set('categoryId', filter.categoryId.toString());
       }
-      if (filter.start_date) {
-        params = params.set('start_date', filter.start_date);
+      if (filter.startDate) {
+        params = params.set('startDate', filter.startDate);
       }
-      if (filter.end_date) {
-        params = params.set('end_date', filter.end_date);
+      if (filter.endDate) {
+        params = params.set('endDate', filter.endDate);
       }
     }
 
@@ -38,7 +38,7 @@ export class ExpenseService {
     const formData = new FormData();
     formData.append('amount', expense.amount.toString());
     formData.append('description', expense.description);
-    formData.append('category_id', expense.category_id.toString());
+    formData.append('categoryId', expense.categoryId.toString());
     formData.append('date', expense.date);
     
     if (expense.notes) {
@@ -47,8 +47,8 @@ export class ExpenseService {
     if (receipt) {
       formData.append('receipt', receipt);
     }
-    if (expense.is_recurring !== undefined) {
-      formData.append('is_recurring', expense.is_recurring.toString());
+    if (expense.isRecurring !== undefined) {
+      formData.append('isRecurring', expense.isRecurring.toString());
     }
 
     return this.http.post<{ message: string; expense: Expense }>(this.apiUrl, formData);
@@ -63,8 +63,8 @@ export class ExpenseService {
     if (expense.description) {
       formData.append('description', expense.description);
     }
-    if (expense.category_id !== undefined) {
-      formData.append('category_id', expense.category_id.toString());
+    if (expense.categoryId !== undefined) {
+      formData.append('categoryId', expense.categoryId.toString());
     }
     if (expense.date) {
       formData.append('date', expense.date);
@@ -75,8 +75,8 @@ export class ExpenseService {
     if (receipt) {
       formData.append('receipt', receipt);
     }
-    if (expense.is_recurring !== undefined) {
-      formData.append('is_recurring', expense.is_recurring.toString());
+    if (expense.isRecurring !== undefined) {
+      formData.append('isRecurring', expense.isRecurring.toString());
     }
 
     return this.http.put<{ message: string; expense: Expense }>(`${this.apiUrl}/${id}`, formData);
