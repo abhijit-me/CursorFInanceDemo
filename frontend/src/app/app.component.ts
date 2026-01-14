@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -57,6 +57,10 @@ import { AuthService } from './core/services/auth.service';
             <a mat-list-item routerLink="/savings-goals" routerLinkActive="active">
               <mat-icon>savings</mat-icon>
               <span>Savings Goals</span>
+            </a>
+            <a mat-list-item routerLink="/monthly-reports" routerLinkActive="active">
+              <mat-icon>assessment</mat-icon>
+              <span>Monthly Report</span>
             </a>
           </mat-nav-list>
         </mat-sidenav>
